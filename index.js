@@ -8,10 +8,11 @@ const start = async () => {
         await worker.initialize("ind");
         await worker.setParameters({});
         var imagePath = "ktp.jpeg";
-        // open a file called "lenna.png"
         var image = await Jimp.read(imagePath);
         image.rgba(false);
+        // grayscale image to get a better result of text
         image.greyscale();
+        // modified and write new image
         await image.write("edited_" + imagePath);
         setTimeout(async () => {
             const data = await worker.recognize("edited_" + imagePath);
